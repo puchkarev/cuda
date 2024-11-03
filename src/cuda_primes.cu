@@ -3,6 +3,8 @@
 #include <inttypes.h>
 #include <math.h>
 
+namespace cuda_primes {
+
 // __device__ designator means it can be called from GPU functions (like kernels)
 // __host__ designator means ti can be called from the CPU functions
 __device__ __host__ void basic_prime_search(int *v, uint64_t start, uint64_t size, uint64_t val) {
@@ -44,3 +46,5 @@ void cuda_prime_search(int *o, uint64_t start, uint64_t size, int block_size) {
     // Deallocate device memory
     cudaFree(d_o);
 }
+
+}  // namespace cuda_primes

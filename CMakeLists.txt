@@ -14,7 +14,7 @@ set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 include_directories(include)
 
 # Specify the CUDA source file
-set(SRC_FILES src/cuda_primes.cu src/main.cpp)
+set(SRC_FILES src/cuda_primes.cu src/parallel_primes.cpp src/main.cpp)
 
 # Add the executable target
 add_executable(prime ${SRC_FILES})

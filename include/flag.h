@@ -8,6 +8,8 @@
 #include <math.h>
 #include <inttypes.h>
 
+namespace base {
+
 char* ParseFlag(int argc, char** argv, const char* flag_name) {
   for (int i = 0; i < argc; ++i) {
     const bool is_flag = argv[i][0] == '-' && argv[i][1] == '-';
@@ -34,5 +36,7 @@ int64_t ParseIntFlagOrDefault(int argc, char** argv, std::string flag_name, int6
 }
 
 #define GetIntFlagOrDefault(flag_name, default_val) ParseIntFlagOrDefault(argc, argv, flag_name, default_val)
+
+}  // namespace
 
 #endif // FLAG_H

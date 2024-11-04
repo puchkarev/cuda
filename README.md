@@ -1,29 +1,78 @@
 # cuda
 Learning to use cuda
 
-Things I did for setup:
+## Setup
 
+### Install NVIDIA driver and toolkit
+
+1. Install NVIDIA Driver for GPU Support from [https://www.nvidia.com/Download/index.aspx]
+
+2. Install wsl
 ```
+wsl.exe --install
+wsl.exe --update
+```
+
+3. Enter the wsl environment
+```
+wsl
+```
+
+4. Install some pre-requisites
+```
+sudo apt update
+sudo apt install gcc
+sudo apt install g++
+sudo apt install cmake
+sudo apt-install build-essential
+```
+
+5. Replace the GPG key
+```
+sudo apt-key del 7fa2af80
 sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/$(lsb_release -cs)/x86_64/7fa2af80.pub
 ```
 
-Added to ~/.bashrc:
+6. Install Linux x86 CUDA Toolkit
 
 ```
+wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/12.6.2/local_installers/cuda-repo-wsl-ubuntu-12-6-local_12.6.2-1_amd64.deb
+sudo dpkg -i cuda-repo-wsl-ubuntu-12-6-local_12.6.2-1_amd64.deb
+sudo cp /var/cuda-repo-wsl-ubuntu-12-6-local/cuda-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-6
+```
+
+7. Inform system of cuda library path:
+
+```
+cat << EOF >> ~/.bashrc
 # Installed library paths for cuda
 export PATH="/usr/local/cuda-12.6/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda-12.6/lib64:$LD_LIBRARY_PATH"
+EOF
+source ~/.bashrc
 ```
 
-To actually build this:
+## Building the project
 
+1. Fetch this repo:
 ```
 git clone https://github.com/puchkarev/cuda
+```
+
+2. Configure and build
+
+```
 cd cuda
 cd build
 cmake ..
 make
 ```
+
+## Runnign the project
 
 To actually run this:
 
